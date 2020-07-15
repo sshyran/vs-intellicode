@@ -2,9 +2,7 @@
 
 # Automate code completions tailored to your codebase with IntelliCode Team completions
 
-Using this GitHub Action, [Visual Studio IntelliCode](https://marketplace.visualstudio.com/items?itemName=VisualStudioExptTeam.VSIntelliCode) automate training a machine learning completions model as part of your CI workflow to provide in-line, contextually-rich completion suggestions based on your own types in C# and C++.
-
-Visual Studio IntelliCode saves you time by putting what you’re most likely to use at the top of your completion list. IntelliCode recommendations are based on thousands of open source projects on GitHub each with over 100 stars. When combined with the context of your code, the completion list is tailored to promote common practices. To get IntelliCode's starred completion suggestions for your own types, or other types not commonly found in open source, use [IntelliCode Team completions](https://aka.ms/vsic-teamcompletions-quickstart).
+[Visual Studio IntelliCode](https://marketplace.visualstudio.com/items?itemName=VisualStudioExptTeam.VSIntelliCode) saves you time by putting what you’re most likely to use at the top of your completion list. IntelliCode recommendations are based on thousands of open source projects on GitHub each with over 100 stars. When combined with the context of your code, the completion list is tailored to promote common practices. To get IntelliCode's starred completion suggestions for your own types, or other types not commonly found in open source, use [IntelliCode Team completions](https://aka.ms/vsic-teamcompletions-quickstart).
 
 With this GitHub Action, you can keep your Team completion suggestions up-to-date with your repository’s latest commit by automating the Team completions model training. 
 
@@ -33,7 +31,9 @@ jobs:
     runs-on: windows-latest
 
     steps:
-    - uses: actions/checkout@v1 # Project needs to be checked out for us be able to analyze the code.
+    - uses: actions/checkout@v2
+      with:
+        fetch-depth: 0 # We need to fetch the entire codebase for code analysis.
     - name: Setup .NET Core
       uses: actions/setup-dotnet@v1
       with:
@@ -59,7 +59,7 @@ jobs:
 
 **Having trouble running the Github Action?**
 If you are having issues with running the IntelliCode GitHub Action or would like to provide feedback, let the IntelliCode team know on [the IntelliCode GitHub issues community forum ](https://aka.ms/vsicissues). If you reproduce the problem before submitting your issue, please attach images and/or gifs to the issue to facilitate our investigations.
-Be sure to tag your issue with the tag `feedback` or `issue`
+Be sure to tag your issue with the tag `feedback` or `issue`.
 
 **Not seeing any IntelliCode completions in Visual Studio?**
 If you are not able to see any IntelliCode completions, you may have extensions installed that are overriding the IntelliSense UI. This can prevent the IntelliCode "starred" suggestions from appearing at the top of the list. You can verify if extensions are causing this behavior by turning them off and then trying IntelliSense again. Or, if the extension supports it, turn off its auto-completion features.
