@@ -1008,6 +1008,8 @@ function run() {
                 "--anonymous",
                 "--verbosity",
                 "n",
+                "--user-agent",
+                "GitHub",
             ];
             const config = core.getInput("config");
             const platform = core.getInput("platform");
