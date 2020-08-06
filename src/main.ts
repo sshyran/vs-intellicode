@@ -39,7 +39,7 @@ async function run(): Promise<void> {
         let verbosity = "n";
 
         // If logs are set as debug, we set diag verbosity.
-        if(overrideLoggingType === "debug"){
+        if (overrideLoggingType === "debug") {
             verbosity = "diag";
         }
 

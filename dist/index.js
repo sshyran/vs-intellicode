@@ -982,6 +982,7 @@ function run() {
             core.addPath(cliPath);
             let directory = process.env.GITHUB_WORKSPACE;
             const overrideDirectory = core.getInput("directory");
+            const overrideLoggingType = core.getInput("logs");
             if (overrideDirectory) {
                 // If directory was overriden, we override that variable.
                 core.info(`overriding directory with given path: '${overrideDirectory}'`);
@@ -1001,13 +1002,18 @@ function run() {
                     throw Error(`Workspace directory '${directory}' doesn't exists in the file system.`);
                 }
             }
+            let verbosity = "n";
+            // If logs are set as debug, we set diag verbosity.
+            if (overrideLoggingType === "debug") {
+                verbosity = "diag";
+            }
             const args = [
                 "train",
                 "--directory",
                 directory,
                 "--anonymous",
                 "--verbosity",
-                "n",
+                verbosity,
                 "--user-agent",
                 "GitHub",
             ];
