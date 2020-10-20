@@ -28,7 +28,7 @@ name: Main IntelliCode Workflow
 on:
   push:
     branches: 
-      - master # IntelliCode recommends training on master branch to increase your model availability. Switch to another branch if you'd like to reduce update frequency.
+      - main # IntelliCode recommends training on main branch to increase your model availability. Switch to another branch if you'd like to reduce update frequency.
 
 jobs:
   build:
