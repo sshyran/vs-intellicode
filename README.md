@@ -11,6 +11,10 @@ With this GitHub Action, you can keep your Team completion suggestions up-to-dat
 * The build agent (MSBUILD, CMAKE) has the minimum required Visual Studio version installed:
 For C# repositories: Visual Studio 2017 or higher
 For C++ repositories: Visual Studio 2019 Update 4 or higher.
+* A full clone of a repository:
+If you are using *checkout@v2* or higher you need to specify a *fetch-depth* of 0 to fetch the complete repository.
+
+
 
 
 ## Usage
@@ -24,16 +28,16 @@ name: Main IntelliCode Workflow
 on:
   push:
     branches: 
-      - master # IntelliCode recommends training on master branch to increase your model availability. Switch to another branch if you'd like to reduce update frequency.
+      - main # IntelliCode recommends training on main branch to increase your model availability. Switch to another branch if you'd like to reduce update frequency.
 
 jobs:
   build:
     runs-on: windows-latest
 
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v2 #Checkout v2 by default fetches just a shallow clone of the repository (latest changes).
       with:
-        fetch-depth: 0 # We need to fetch the entire codebase for code analysis.
+        fetch-depth: 0 # If you are using v2 We need to override the fetch-depth to fetch the entire codebase for code analysis.
     - name: Setup .NET Core
       uses: actions/setup-dotnet@v1
       with:
@@ -77,7 +81,8 @@ For feature requests or suggestions click the  **Send feedback about** > **This 
 - This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/).
 - For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or
 contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments.
-- [Privacy Policy](https://privacy.microsoft.com/en-us/privacystatement)
+- [Privacy Policy](https://privacy.microsoft.com/en-us/privacystatement).
+- [License Terms](https://marketplace.visualstudio.com/items/VisualStudioExptTeam.VSIntelliCodeTeamModelTraining/license).
 
 
 ## Supported build configurations
